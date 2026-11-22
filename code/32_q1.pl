@@ -41,6 +41,10 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
+% CLUE 9: The person who prefers AI projects works in testing.
+clue(9, Solution) :-
+    member(p(_, testing, _, 'AI'), Solution).
+
 % Generate all possible assignments without repeating attribute values.
 generate_solution(Solution) :-
     permutation([research, development, design, testing],
@@ -78,6 +82,8 @@ main :-
     format('Ben = [~w, ~w, ~w]~n', [D2, L2, P2]),
     format('Carla = [~w, ~w, ~w]~n', [D3, L3, P3]),
     format('Dana = [~w, ~w, ~w]~n', [D4, L4, P4]).
+
+
 
 
 
