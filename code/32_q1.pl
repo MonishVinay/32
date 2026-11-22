@@ -54,7 +54,15 @@ generate_solution(Solution) :-
         p('Ben', D2, L2, P2),
         p('Carla', D3, L3, P3),
         p('Dana', D4, L4, P4)
-    ],
-    forall(between(1, 8, N), clue(N, Solution)).
+    ].
+
+% Count assignments satisfying the selected clues.
+count_solutions(Active, N) :-
+    findall(Solution,
+        (generate_solution(Solution),
+         forall(member(C, Active), clue(C, Solution))),
+        Solutions),
+    length(Solutions, N).
+
 
 
