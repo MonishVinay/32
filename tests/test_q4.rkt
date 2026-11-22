@@ -1,11 +1,33 @@
-
 #lang racket/base
 
 (require rackunit
          rackunit/text-ui
          racket/port
          racket/list
-         "../code/32_q4.rkt")
+         racket/runtime-path)
+
+; Locate the Q4 file relative to this test file.
+(define-runtime-path q4-path "../code/32_q4.rkt")
+
+; Load the module and access its internal definitions.
+(dynamic-require q4-path #f)
+(define q4-ns (module->namespace q4-path))
+
+(define my-length
+  (eval 'my-length q4-ns))
+
+(define my-map
+  (eval 'my-map q4-ns))
+
+(define make-inserter
+  (eval 'make-inserter q4-ns))
+
+(define insert-if-short
+  (eval 'insert-if-short q4-ns))
+
+(define print-insert-result
+  (eval 'print-insert-result q4-ns))
+
 
 (define q4-tests
   (test-suite

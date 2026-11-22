@@ -55,4 +55,3 @@
     (display result)
     (newline)))
 
-(provide my-length my-map make-inserter insert-if-short print-insert-result)
