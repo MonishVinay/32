@@ -67,3 +67,7 @@
   (display (list (tree-height tree)
                  (leaf-count tree)))
   (newline))
+  
+(provide print-inorder
+         print-all-traversals
+         print-height-and-leaves)
