@@ -200,4 +200,46 @@ test(no_duplicate_equations) :-
     sort(Es, Unique),
     length(Unique, N).
 
+% Repeated input values must remain separate.
+test(repeated_numbers) :-
+    all_equations([2,2,4], Es),
+    member("2+2=4", Es),
+    sort(Es, Es).
+
+% Zero should be supported in valid equations.
+test(zero_input) :-
+    all_equations([0,0], Es),
+    Es == ["0=0"].
+
+% Division by zero must be rejected.
+test(zero_divisor, [fail]) :-
+    evaluate_expr(
+        tree('/', num(8), num(0)), _).
+
+% Negative intermediate results are permitted.
+test(negative_intermediate) :-
+    evaluate_expr(
+        tree('*',
+             tree('-', num(2), num(5)),
+             num(3)),
+        -9).
+
+% Different parenthesized trees must retain distinct strings.
+test(distinct_parentheses) :-
+    format_expr(
+        tree('+', num(1),
+             tree('+', num(2), num(3))), A),
+    format_expr(
+        tree('+',
+             tree('+', num(1), num(2)),
+             num(3)), B),
+    A == "1+(2+3)",
+    B == "1+2+3",
+    A \== B.
+
+% A single number cannot form an equation.
+test(single_number_no_equation) :-
+    all_equations([7], Es),
+    Es == [].
+
 :- end_tests(q2).
