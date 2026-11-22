@@ -82,3 +82,30 @@ format_expr_context(tree(Op, Left, Right),
     ).
 
 
+% Generate a valid arithmetic equation from the given numbers.
+generate_equation(Numbers, Equation) :-
+    % Split into two nonempty sides.
+    append(LeftNums, RightNums, Numbers),
+    LeftNums = [_|_],
+    RightNums = [_|_],
+
+    % Generate expression trees for both sides.
+    expression_tree(LeftNums, LeftExpr),
+    expression_tree(RightNums, RightExpr),
+
+    % Evaluate both expressions.
+    evaluate_expr(LeftExpr, LeftValue),
+    evaluate_expr(RightExpr, RightValue),
+
+    % Both sides must have equal values.
+    LeftValue =:= RightValue,
+
+    % Convert trees to canonical strings.
+    format_expr(LeftExpr, LeftString),
+    format_expr(RightExpr, RightString),
+
+    % Combine them into one equation string.
+    format(string(Equation), '~s=~s',
+           [LeftString, RightString]).
+
+
