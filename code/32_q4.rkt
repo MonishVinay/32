@@ -9,4 +9,11 @@
         count
         (loop (cdr remaining) (+ count 1)))))
 
-(provide my-length)
+
+; Apply a function to each element of a list.
+(define (my-map fn lst)
+  (if (null? lst)
+      '()
+      (cons (fn (car lst))
+            (my-map fn (cdr lst)))))
+(provide my-length my-map)
