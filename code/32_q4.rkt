@@ -45,4 +45,14 @@
                   (lambda (len) (< len n)))
    lst))
 
-(provide my-length my-map make-inserter insert-if-short)
+
+; Read x, lst and n, then print the transformed list.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read))
+         (result (insert-if-short x lst n)))
+    (display result)
+    (newline)))
+
+(provide my-length my-map make-inserter insert-if-short print-insert-result)
