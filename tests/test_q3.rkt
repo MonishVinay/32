@@ -3,7 +3,24 @@
 (require rackunit
          rackunit/text-ui
          racket/port
-         "../code/32_q3.rkt")
+         racket/runtime-path)
+
+; Locate the Q3 file relative to this test file.
+(define-runtime-path q3-path "../code/32_q3.rkt")
+
+; Load the module and access its internal definitions.
+(dynamic-require q3-path #f)
+(define q3-ns (module->namespace q3-path))
+
+(define print-inorder
+  (eval 'print-inorder q3-ns))
+
+(define print-all-traversals
+  (eval 'print-all-traversals q3-ns))
+
+(define print-height-and-leaves
+  (eval 'print-height-and-leaves q3-ns))
+
 
 ; Trees from the assignment.
 (define t1
