@@ -110,6 +110,30 @@
    (test-case "height and leaves single node"
      (check-equal?
       (capture-output print-height-and-leaves single-tree)
-      "(1 1)\n"))))
+      "(1 1)\n"))
 
+   (test-case "left skewed tree"
+     (check-equal?
+      (capture-output print-all-traversals
+                      '(3 (2 (1 () ()) ()) ()))
+      "(1 2 3)\n(3 2 1)\n(1 2 3)\n"))
+
+   (test-case "left skewed height and leaves"
+     (check-equal?
+      (capture-output print-height-and-leaves
+                      '(3 (2 (1 () ()) ()) ()))
+      "(3 1)\n"))
+
+   (test-case "unequal subtree heights"
+     (check-equal?
+      (capture-output print-height-and-leaves
+                      '(5 (3 (2 () ()) ()) (8 () ())))
+      "(3 2)\n"))
+
+   (test-case "single symbol node"
+     (check-equal?
+      (capture-output print-all-traversals
+                      '(a () ()))
+      "(a)\n(a)\n(a)\n"))))
+   
 (run-tests q3-tests)
