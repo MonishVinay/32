@@ -41,7 +41,7 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
-% Generate a valid assignment satisfying all eight clues.
+% Generate all possible assignments without repeating attribute values.
 generate_solution(Solution) :-
     permutation([research, development, design, testing],
                 [D1, D2, D3, D4]),
@@ -63,6 +63,22 @@ count_solutions(Active, N) :-
          forall(member(C, Active), clue(C, Solution))),
         Solutions),
     length(Solutions, N).
+
+% Print one solution satisfying clues 1 to 8.
+main :-
+    generate_solution(Solution),
+    forall(between(1, 8, N), clue(N, Solution)),
+    Solution = [
+        p('Alex', D1, L1, P1),
+        p('Ben', D2, L2, P2),
+        p('Carla', D3, L3, P3),
+        p('Dana', D4, L4, P4)
+    ],
+    format('Alex = [~w, ~w, ~w]~n', [D1, L1, P1]),
+    format('Ben = [~w, ~w, ~w]~n', [D2, L2, P2]),
+    format('Carla = [~w, ~w, ~w]~n', [D3, L3, P3]),
+    format('Dana = [~w, ~w, ~w]~n', [D4, L4, P4]).
+
 
 
 
