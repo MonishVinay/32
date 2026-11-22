@@ -20,3 +20,7 @@ clue(4, Solution) :-
     member(p('Ben', Dept, _, web), Solution),
     Dept \= testing.
 
+% Clue 5: The person who prefers Java works in design.
+clue(5, Solution) :-
+    member(p(_, design, java, _), Solution).
+
