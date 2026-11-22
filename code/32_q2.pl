@@ -109,3 +109,15 @@ generate_equation(Numbers, Equation) :-
            [LeftString, RightString]).
 
 
+% Find all valid equations, remove duplicates and sort them.
+all_equations(Numbers, Equations) :-
+    findall(Equation,
+            generate_equation(Numbers, Equation),
+            All),
+    sort(All, Equations).
+
+% Count the number of unique valid equations.
+count_equations(Numbers, N) :-
+    all_equations(Numbers, Equations),
+    length(Equations, N).
+
