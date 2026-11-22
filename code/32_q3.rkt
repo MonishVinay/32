@@ -13,10 +13,6 @@
 (define (print-inorder tree)
   (display (inorder-acc tree '()))
   (newline))
-(provide print-inorder
-         print-all-traversals
-         print-height-and-leaves)
-
 
 ; Build preorder traversal: root, left, right.
 (define (preorder-acc tree acc)
@@ -67,7 +63,7 @@
   (display (list (tree-height tree)
                  (leaf-count tree)))
   (newline))
-  
+
 (provide print-inorder
          print-all-traversals
          print-height-and-leaves)
