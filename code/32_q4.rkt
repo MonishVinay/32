@@ -38,4 +38,11 @@
                   processed))))))
     insert-list))
 
-(provide my-length my-map make-inserter)
+
+; Insert x into all lists whose original length is less than n.
+(define (insert-if-short x lst n)
+  ((make-inserter x
+                  (lambda (len) (< len n)))
+   lst))
+
+(provide my-length my-map make-inserter insert-if-short)
