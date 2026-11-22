@@ -16,4 +16,26 @@
       '()
       (cons (fn (car lst))
             (my-map fn (cdr lst)))))
-(provide my-length my-map)
+
+
+; Create a function that inserts x into lists satisfying len-ok?.
+(define (make-inserter x len-ok?)
+  (letrec
+      ((insert-list
+        (lambda (lst)
+          (let ((original-length (my-length lst)))
+            (let ((processed
+                   (my-map
+                    (lambda (item)
+                      (if (pair? item)
+                          (insert-list item)
+                          (if (null? item)
+                              (insert-list item)
+                              item)))
+                    lst)))
+              (if (len-ok? original-length)
+                  (cons x processed)
+                  processed))))))
+    insert-list))
+
+(provide my-length my-map make-inserter)
