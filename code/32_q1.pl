@@ -30,3 +30,9 @@ clue(6, Solution) :-
     Dept \= development,
     Project \= embedded.
 
+% Clue 7: Dana does not prefer Java and works in research or testing.
+clue(7, Solution) :-
+    member(p('Dana', Dept, Lang, _), Solution),
+    Lang \= java,
+    (Dept = research ; Dept = testing).
+
