@@ -24,3 +24,9 @@ clue(4, Solution) :-
 clue(5, Solution) :-
     member(p(_, design, java, _), Solution).
 
+% Clue 6: Carla does not prefer embedded projects or work in development.
+clue(6, Solution) :-
+    member(p('Carla', Dept, _, Project), Solution),
+    Dept \= development,
+    Project \= embedded.
+
