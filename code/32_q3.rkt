@@ -13,7 +13,9 @@
 (define (print-inorder tree)
   (display (inorder-acc tree '()))
   (newline))
-(provide print-inorder print-all-traversals)
+(provide print-inorder
+         print-all-traversals
+         print-height-and-leaves)
 
 
 ; Build preorder traversal: root, left, right.
@@ -39,4 +41,29 @@
   (display (preorder-acc tree '()))
   (newline)
   (display (postorder-acc tree '()))
+  (newline))
+
+
+; Calculate the height of a binary tree.
+(define (tree-height tree)
+  (if (null? tree)
+      0
+      (+ 1
+         (max (tree-height (cadr tree))
+              (tree-height (caddr tree))))))
+
+; Count the number of leaf nodes.
+(define (leaf-count tree)
+  (if (null? tree)
+      0
+      (if (and (null? (cadr tree))
+               (null? (caddr tree)))
+          1
+          (+ (leaf-count (cadr tree))
+             (leaf-count (caddr tree))))))
+
+; Print height and leaf count as one list.
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree)
+                 (leaf-count tree)))
   (newline))
