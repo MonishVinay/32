@@ -36,3 +36,9 @@ clue(7, Solution) :-
     Lang \= java,
     (Dept = research ; Dept = testing).
 
+% Clue 8: The person who prefers data works in research and does not use JavaScript.
+clue(8, Solution) :-
+    member(p(_, research, Lang, data), Solution),
+    Lang \= javascript.
+
+
